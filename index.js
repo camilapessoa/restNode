@@ -1,8 +1,20 @@
 const customExpress = require('./config/customExpress')
+const conexao = require('./infraestrutura/conexao')
+const Tabelas = require('./infraestrutura/tabelas')
 
-const app = customExpress()
-const PORT = 8080;
+const PORT = 8081;
 
-app.listen(PORT, () => console.log(`Servidor na porta ${PORT}`))
-app.get('/', (req, res)=> res.send(`Teste de servidor na porta ${PORT}`))
+//app.get('/', (req, res)=> res.send(`Teste de servidor na porta ${PORT}`))
 
+conexao.connect(erro =>{
+    if(erro) {
+        console.log(erro);
+    } else {
+        console.log("SUCESSO");
+        
+        Tabelas.init(conexao)
+        
+        const app = customExpress()
+        app.listen(PORT, () => console.log(`Servidor na porta ${PORT}`));
+    }
+})
