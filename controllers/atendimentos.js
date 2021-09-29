@@ -8,8 +8,8 @@ module.exports = app => {
         const atendimento = req.body
         //console.log('Atendimento enviado');
         //console.log(req.body);
-        Atendimento.adiciona(atendimento)
-        res.send ('Você está na rota de atendimentos e realizando um POST')
+        Atendimento.adiciona(atendimento, res)
+        //res.send ('Você está na rota de atendimentos e realizando um POST')
     })
 
 }
